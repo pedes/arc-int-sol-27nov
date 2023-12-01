@@ -1,0 +1,102 @@
+# API Security Checklist
+
+- [ ] Critical information about system components (e.g. server name, version, installed program versions, etc.) of web, application, and database servers should be obscured and not revealed via HTTP responses or error messages.
+- [ ] Error messages of web applications and application-server default error messages should not be displayed in details to clients.
+- [ ] Directory listing should be disabled on application and web servers.
+- [ ] Sensitive links which should not be indexed by search engines should be listed within robots.txt files. On the other hand, if a critical webpage (e.g. administration panel) is not explicitly linked within the web application, it should not be included within robot.txt files as well.
+- [ ] All latest patches should be installed for application frameworks, application servers, database and web servers as soon as possible they are available.
+- [ ] All HTTP methods except GET and POST should be disabled if they are not in use.
+- [ ] Access to non-public resources (e.g. backup files, development test files) should be restricted for certain users and unnecessary applications (e.g. default web server sites, demo applications) should be removed.
+- [ ] Security features of application frameworks (e.g. ASP.NET, PHP, STRUTS) should be enabled.
+- [ ] Default user accounts should be removed from applications, systems, and databases.
+- [ ] HTTP/HTML attributes (e.g. autocomplete, cache-control, pragma) should be enabled and configured accordingly to prevent storage of sensitive information like passwords within caches.
+- [ ] Weak SSL algorithms should be disabled, and only secure algorithms should be allowed for secure communication over SSL.
+- [ ] Cross-Domain policies (for Flash crossdomain.xml and for SilverLight clientaccesspolicy.xml) should be configured in a secure manner. Allowing access to all domains should be prevented if not required.
+- [ ] SSL renegotiation feature should be disabled against DoS and MITM attacks.
+- [ ] Only strong and complex passwords should be allowed for administrators and clients to use.
+- [ ] Passwords and secret question-answer of password retrieval functions should never be stored in plain text.
+- [ ] Any critical data (e.g. password, credit card, personal data) should be exchanged between clients and servers only over secure HTTPS protocol.
+- [ ] Authentication and authorization should be performed on the server-side for any access to non-public resources.
+- [ ] Salt value should be used as well by the generation of password hashes.
+- [ ] Users should be forced to change their initial password, which they get within an envelope or via email, by their first access to the system.
+- [ ] All critical activities within applications should be logged at the application and server levels.
+- [ ] A common message should be used for authentication failures to prevent user enumeration attacks. An example of such a message would be "Username and/or Password is wrong".
+- [ ] All successful and unsuccessful authentication attempts and access attempts to resources should be logged.
+- [ ] Unique values (e.g. session identifiers, tokens, etc.) used for session management should be generated via secure random number generators.
+- [ ] An inactivity timeout should be set up for sessions.
+- [ ] After each authentication and reauthentication, a new session id should be created, and the old session id should be invalidated. After logging out, the session id should be invalidated as well.
+- [ ] Solutions like tokens, captchas should be integrated for critical operations in order to prevent Cross-Site-Request-Forgery (CSRF) attacks.
+- [ ] The domain and path for cookies containing authenticated session identifiers should be set to an appropriately restricted value for the site.
+- [ ] `httponly` attribute should be set on cookies. In addition, `secure` attribute should be set on cookies for HTTPS communications.
+- [ ] After successful authentication operations, users should be redirected via HTTP 302 to internal pages.
+- [ ] Logout links should be available within all pages of accessed applications.
+- [ ] Parameter manipulations within GET/POST requests should be taken into consideration, and unauthorized access to legal user resources by attackers should be prevented.
+- [ ] A System user that owns an application process should have access right only to the directory of the application.
+- [ ] Database user should have access only to the database resources that are used by the application.
+- [ ] Database user should be able to access the database server only through the relevant application server IP address.
+- [ ] Synchronization mechanisms over critical resources, objects, and methods should be implemented to prevent race-conditions.
+- [ ] Web-based statistics applications installed on servers should only be accessible for authorized users.
+- [ ] Restricted URLs, functions, object references, services, application data, user information, and security configuration files should be accessible for authorized users and roles.
+- [ ] If a user does not need an access right anymore (e.g. leaving the company, changing role within the project), the access right should be withdrawn as soon as possible.
+- [ ] The current password should always be asked to users for password change functionalities.
+- [ ] Password retrieval functionalities should be supported with secret questions and similar arguments.
+- [ ] Password retrieval functionalities should not send user names and passwords back within emails. Instead, a link with a certain lifetime should be sent that prompts a dialog for password change.
+- [ ] Names of critical directories like administration panels should not be easily guessable (e.g. admin, administration).
+- [ ] When applications are transferred from a development/integration environment into a production environment, unnecessary resources (e.g. test codes, demo applications, backup files) should be excluded. Source files should be excluded as well if they are not required. Comments should be removed from source files. Integrity of transferred files should be checked and guaranteed.
+- [ ] It should be checked if sensitive files and resources belonging to the application domain are not indexed via Google/Bing search engines and not accessible to third parties.
+- [ ] All user inputs should be validated on the server-side. White-lists should be preferred for validation instead of black-lists. Each input should be encoded to a common character set before validation (canonicalization).
+- [ ] User inputs should be escaped and validated before using as a part of command execution.
+- [ ] Prepared statement, parameterized query, bind variables, and whitelist data validation should be implemented to prevent SQL injection attacks.
+- [ ] Output Escaping/Encoding should be applied on all user inputs before they are displayed on their screens. For additional security, user inputs can be checked for type, length, and content.
+- [ ] User inputs regarding arithmetic operations should be checked and validated for minimum and maximum values.
+- [ ] User inputs regarding file access operations should be normalized and validated.
+- [ ] By the operation of a file upload, name, length, type, and content of the file should be checked.
+- [ ] User inputs used for HTTP redirects should be validated by using whitelist method to prevent phishing attacks (open redirect problem).
+- [ ] User inputs used for LDAP queries should be sanitized before connection.
+- [ ] User inputs used for XPath queries should be sanitized.
+- [ ] CR/LF characters sent within user inputs should not be directly appended within HTTP Responses on the application side (CRLF injection attack). User inputs should be properly sanitized.
+- [ ] Appropriate solutions against frame busting and clickjacking attacks should be implemented within web applications.
+- [ ] Penetration testing of a web application should be performed before the application becomes online.
+- [ ] CAPTCHA or similar anti-automation security controls should be implemented within HTML forms to prevent DoS, brute-forcing, and dictionary attacks.
+- [ ] A timeout for search functionalities should be enabled against SQL Wildcard attacks which force databases to perform CPU-intensive queries by using several search wildcards like "%" or "*".
+- [ ] Authentication should be activated for accessing web services implemented with SOAP, Restful, XML-RPC, or similar technologies.
+- [ ] Web services implemented by using common frameworks should be secured against typical XML attacks (e.g. external entity, a billion laughs, XML bomb, etc.) and parameter manipulation attacks.
+- [ ] Describe auditing architecture.
+- [ ] List supported authentication methods.
+- [ ] Describe the Application Layer Security process.
+- [ ] Once authenticated at the Web Server, the authentication token passed in to Application Server must be asserted with the Security Policy Server for validity.
+- [ ] Application shall provide functionality to clean up temporary data, files, and any other temporary stale information.
+- [ ] Describe how court configuration is updated in the application.
+- [ ] Describe a database failover system if available.
+- [ ] All sensitive data stored in the database shall be secured and encrypted.
+- [ ] Describe compliance parameters if implemented for use.
+- [ ] Application shall function in an active-active High Availability configuration without any single point of failure in any of the application components.
+- [ ] Describe High Availability architecture of the application.
+- [ ] Describe the supported hardware configurations.
+- [ ] All network traffic between the browser and the application shall be encrypted.
+- [ ] Specify network bandwidth requirements.
+- [ ] List of supported operating systems.
+- [ ] Application shall comply with Payment Card Industry (PCI) security standards.
+- [ ] Recommended specifications for Server/CPU/Memory/Storage/Network resources.
+- [ ] For reports, if a separate reporting database is required, describe the supported data replication mechanisms.
+- [ ] Describe the reports architecture.
+- [ ] Capturing and displaying end-to-end response times for interactive user requests is highly desired.
+- [ ] The Open Web Application Security Project is an open community dedicated to enabling organizations to develop, purchase, and maintain applications that can be trusted. OWASP Application Security Verification Standard (ASVS) is used to establish a level of confidence in the security of Web applications. Describe the application's support and adherence to OWASP-ASVS standard and the results of the security verification.
+- [ ] Session duration shall be configurable.
+- [ ] Describe how the application supports multiple instances in a shared hardware environment.
+- [ ] Describe the administrative utilities available for overall management.
+- [ ] List the virtualization technologies supported.
+- [ ] Describe web application architecture.
+- [ ] Application should be accessible via a web browser without having to install program components.
+- [ ] List all supported browsers and versions.
+- [ ] Describe compliance with the WS-I (Web Service Interoperability) specification.
+- [ ] All APIs exposed for integration with other applications shall conform to Web Services Industry Standards. Describe support for the listed open standards:
+  - [ ] File Transfer Protocol Secure (FTPS)
+  - [ ] Hypertext Transfer Protocol (HTTP)
+  - [ ] HTTP Secure (HTTPS)
+  - [ ] Secure Shell (SSH) File Transfer Protocol (SFTP)
+  - [ ] Simple Object Access Protocol (SOAP) 1.2
+  - [ ] Universal Description, Discovery and Integration (UDDI)
+  - [ ] Web Services Description Language (WSDL).
+- [ ] Describe supported authentication methods for Web Services.
+
